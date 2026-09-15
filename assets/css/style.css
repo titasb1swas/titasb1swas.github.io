@@ -65,7 +65,7 @@ body {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.35;
+  opacity: 0.1;
   will-change: transform;
 }
 
@@ -308,6 +308,7 @@ header {
 /* Floating Metric Badges */
 .floating-card {
   position: absolute;
+  z-index: 2;
   background: rgba(49, 50, 68, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
