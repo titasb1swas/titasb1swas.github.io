@@ -66,7 +66,7 @@ body {
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.35;
-  animation: blobDrift 18s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 .blob-1 {
@@ -75,7 +75,6 @@ body {
   background: var(--accent-mauve);
   top: -120px;
   left: -100px;
-  animation-delay: 0s;
 }
 
 .blob-2 {
@@ -84,7 +83,6 @@ body {
   background: var(--accent-lavender);
   top: 30%;
   right: -80px;
-  animation-delay: -5s;
 }
 
 .blob-3 {
@@ -93,7 +91,6 @@ body {
   background: var(--accent-blue);
   bottom: 5%;
   left: 15%;
-  animation-delay: -10s;
 }
 
 .blob-4 {
@@ -102,14 +99,6 @@ body {
   background: var(--accent-mauve);
   bottom: 30%;
   right: 20%;
-  animation-delay: -3s;
-}
-
-@keyframes blobDrift {
-  0%   { transform: translate(0px, 0px) scale(1); }
-  33%  { transform: translate(30px, -40px) scale(1.05); }
-  66%  { transform: translate(-20px, 20px) scale(0.97); }
-  100% { transform: translate(10px, -15px) scale(1.02); }
 }
 
 .container {
@@ -738,4 +727,35 @@ footer {
 
 .privacy-container a:hover {
   text-decoration: underline;
+}
+
+/* ─── Scroll Reveal ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ─── 3D Tilt (phone frame) ─── */
+.phone-frame {
+  transition: transform 0.12s linear;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ─── Blob parallax layers ─── */
+.blob {
+  will-change: transform;
 }

@@ -111,44 +111,44 @@
 
   <!-- Features Section -->
   <section id="features" class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div class="section-tag">Designed for Audio Drama Lovers</div>
       <h2 class="section-title">The Smart Directory for Bengali Audio Literature</h2>
       <p class="section-desc">Tired of endless scrolling on YouTube? Golpo Sandhan organizes Bengal's richest audio stories into an instant, searchable catalog.</p>
     </div>
 
     <div class="features-grid">
-      <div class="feature-card">
+      <div class="feature-card reveal reveal-delay-1">
         <div class="feature-icon">🔍</div>
         <h4>Multi-Field Search & Filter</h4>
         <p>Filter effortlessly across Writers, Character Series (Feluda, Byomkesh, Shonku), Production Shows, and Episode Duration to find the exact listen for your mood.</p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card reveal reveal-delay-2">
         <div class="feature-icon">📚</div>
         <h4>Series & Multi-Part Tracking</h4>
         <p>Multi-part sagas are grouped systematically. Never lose track of which episode comes next in complex detective or horror sagas.</p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card reveal reveal-delay-3">
         <div class="feature-icon">✍️</div>
         <h4>Detailed Literary Summaries</h4>
         <p>Preview authentic Bengali synopses, publication years, ratings, and view counts before diving into an episode.</p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card reveal reveal-delay-1">
         <div class="feature-icon">🎧</div>
         <h4>Bilingual Search (English & বাংলা)</h4>
         <p>Instant live search matching both English transliterations and native Bengali script (e.g., searching "Goyenda" or "গোয়েন্দা").</p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card reveal reveal-delay-2">
         <div class="feature-icon">✨</div>
         <h4>Smart Recommendations</h4>
         <p>Discover related audio stories based on matching creators, iconic characters, and complementary literary tones.</p>
       </div>
 
-      <div class="feature-card">
+      <div class="feature-card reveal reveal-delay-3">
         <div class="feature-icon">🚀</div>
         <h4>Zero-Friction Playback</h4>
         <p>Launch audio plays directly in official YouTube, YouTube Music, or external browser players without battery-draining background tasks.</p>
@@ -158,13 +158,13 @@
 
   <!-- Showcase / Screenshots Gallery -->
   <section id="showcase" class="container showcase">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div class="section-tag">In-App Experience</div>
       <h2 class="section-title">Clean, Cinematic Dark Interface</h2>
       <p class="section-desc">Designed with modern Material 3 aesthetics featuring rich poster visuals, circular author avatars, and lightweight navigation.</p>
     </div>
 
-    <div class="showcase-scroll">
+    <div class="showcase-scroll reveal">
       <div class="showcase-item">
         <img src="assets/images/Home.png" alt="Home Feed" />
         <p>Discover & New Releases</p>
@@ -194,7 +194,7 @@
 
   <!-- CTA Banner -->
   <section class="container">
-    <div class="cta-banner">
+    <div class="cta-banner reveal">
       <h3>Ready to Explore Bengal's Greatest Stories?</h3>
       <p>Download Golpo Sandhan today and stop wasting time searching. Your next mystery is just one tap away.</p>
       <a href="https://play.google.com/store/apps/details?id=com.golposandhan.story" target="_blank" rel="noopener" class="playstore-button">
@@ -230,6 +230,107 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    /* ── 1. Scroll-reveal via IntersectionObserver ── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ── 2. Unified blob parallax: ambient drift + scroll depth ── */
+    const blobs = [
+      {
+        el: document.querySelector('.blob-1'),
+        // Ambient drift params: amplitude (px), frequency (rad/s), phase offset
+        ax: 40, fx: 0.00028, px: 0.0,
+        ay: 35, fy: 0.00021, py: 1.2,
+        // Scroll parallax multiplier (positive = same dir as scroll, negative = opposite)
+        scrollY: 0.30
+      },
+      {
+        el: document.querySelector('.blob-2'),
+        ax: 30, fx: 0.00022, px: 2.1,
+        ay: 50, fy: 0.00017, py: 0.5,
+        scrollY: -0.22
+      },
+      {
+        el: document.querySelector('.blob-3'),
+        ax: 55, fx: 0.00019, px: 4.3,
+        ay: 28, fy: 0.00031, py: 3.0,
+        scrollY: 0.16
+      },
+      {
+        el: document.querySelector('.blob-4'),
+        ax: 25, fx: 0.00035, px: 1.7,
+        ay: 40, fy: 0.00024, py: 2.5,
+        scrollY: -0.35
+      }
+    ];
+
+    function blobLoop(ts) {
+      const sy = window.scrollY;
+      blobs.forEach(b => {
+        if (!b.el) return;
+        const driftX = Math.sin(ts * b.fx + b.px) * b.ax;
+        const driftY = Math.cos(ts * b.fy + b.py) * b.ay;
+        const scrollOffset = sy * b.scrollY;
+        b.el.style.transform =
+          `translate(${driftX}px, ${driftY + scrollOffset}px)`;
+      });
+      requestAnimationFrame(blobLoop);
+    }
+    requestAnimationFrame(blobLoop);
+
+    /* ── 3. Mouse parallax — 3D tilt on phone + floating cards ── */
+    const hero  = document.querySelector('.hero');
+    const phone = document.querySelector('.phone-frame');
+    const cards = document.querySelectorAll('.floating-card');
+
+    if (hero && phone) {
+      let mouseX = 0, mouseY = 0;
+      let currentX = 0, currentY = 0;
+      let lerpRaf = null;
+
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+        mouseY = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+        if (!lerpRaf) lerpRaf = requestAnimationFrame(lerpTick);
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        mouseX = 0; mouseY = 0;
+        if (!lerpRaf) lerpRaf = requestAnimationFrame(lerpTick);
+      });
+
+      function lerpTick() {
+        currentX += (mouseX - currentX) * 0.08;
+        currentY += (mouseY - currentY) * 0.08;
+
+        const tiltX =  currentY * 10;
+        const tiltY = -currentX * 10;
+        phone.style.transform =
+          `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+
+        cards.forEach((card, i) => {
+          const depth = (i % 2 === 0) ? 18 : 12;
+          card.style.transform =
+            `translate(${-currentX * depth}px, ${-currentY * depth}px)`;
+        });
+
+        const stillMoving =
+          Math.abs(mouseX - currentX) > 0.001 ||
+          Math.abs(mouseY - currentY) > 0.001;
+        lerpRaf = stillMoving ? requestAnimationFrame(lerpTick) : null;
+      }
+    }
+  </script>
 
 </body>
 </html>
