@@ -482,10 +482,10 @@ header {
   margin-bottom: 20px;
 }
 
-.feature-icon i {
-  font-size: 26px;
+.feature-icon svg {
+  width: 28px;
+  height: 28px;
   color: var(--accent-lavender);
-  line-height: 1;
 }
 
 .feature-card h4 {
