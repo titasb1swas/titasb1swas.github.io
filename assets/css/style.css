@@ -323,34 +323,50 @@ header {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(205, 214, 244, 0.15);
-  padding: 12px 18px;
-  border-radius: 14px;
+  padding: 18px 24px;
+  border-radius: 18px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   animation: float 4s ease-in-out infinite;
+  min-width: 140px;
 }
 
-.floating-card.left {
-  top: 15%;
-  left: -20px;
+.floating-card.top-left {
+  top: 12%;
+  left: -30px;
+  animation-delay: 0s;
 }
 
-.floating-card.right {
-  bottom: 12%;
-  right: -20px;
+.floating-card.bottom-left {
+  bottom: 30%;
+  left: -30px;
+  animation-delay: 1s;
+}
+
+.floating-card.top-right {
+  top: 36%;
+  right: -30px;
   animation-delay: 2s;
+}
+
+.floating-card.bottom-right {
+  bottom: 8%;
+  right: -30px;
+  animation-delay: 3s;
 }
 
 .floating-card .val {
   font-weight: 600;
-  font-size: 1.15rem;
-  color: var(--accent-blue);
+  font-size: 1.5rem;
+  color: var(--accent-lavender);
+  margin-bottom: 4px;
 }
 
 .floating-card .lbl {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   text-transform: uppercase;
   font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 @keyframes float {
@@ -645,7 +661,10 @@ footer {
   .stat-item:nth-child(2)::after {
     display: none;
   }
-  .floating-card {
+  .floating-card.top-left,
+  .floating-card.bottom-left,
+  .floating-card.top-right,
+  .floating-card.bottom-right {
     display: none;
   }
 }
