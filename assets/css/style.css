@@ -291,7 +291,6 @@ header {
 
 .phone-frame {
   width: 100%;
-  max-width: 320px;
   border-radius: 40px;
   padding: 10px;
   background: #313244; /* surface0 */
@@ -305,10 +304,39 @@ header {
   display: block;
 }
 
+.phone-positioner {
+  width: 100%;
+  max-width: 320px;
+}
+
+.phone-main {
+  position: relative;
+  z-index: 3;
+}
+
+.phone-left, .phone-right {
+  position: absolute;
+  top: 50%;
+  width: 320px;
+  z-index: 1;
+  opacity: 0.65;
+  filter: blur(2px) brightness(0.65);
+}
+
+.phone-left {
+  right: 50%;
+  transform: translate(-10px, -45%) scale(0.85) rotate(-6deg);
+}
+
+.phone-right {
+  left: 50%;
+  transform: translate(10px, -45%) scale(0.85) rotate(6deg);
+}
+
 /* Floating Metric Badges */
 .floating-card {
   position: absolute;
-  z-index: 2;
+  z-index: 10;
   background: rgba(49, 50, 68, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -659,7 +687,9 @@ footer {
   .floating-card.top-left,
   .floating-card.bottom-left,
   .floating-card.top-right,
-  .floating-card.bottom-right {
+  .floating-card.bottom-right,
+  .phone-left,
+  .phone-right {
     display: none;
   }
 }
