@@ -50,9 +50,66 @@ body {
   font-family: 'SF Pro Rounded', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
-  background-image: 
-    radial-gradient(circle at 15% 20%, rgba(180, 190, 254, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 85% 60%, rgba(203, 166, 247, 0.05) 0%, transparent 45%);
+}
+
+/* ─── Background Blobs ─── */
+.bg-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: blobDrift 18s ease-in-out infinite alternate;
+}
+
+.blob-1 {
+  width: 520px;
+  height: 520px;
+  background: var(--accent-mauve);
+  top: -120px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  width: 420px;
+  height: 420px;
+  background: var(--accent-lavender);
+  top: 30%;
+  right: -80px;
+  animation-delay: -5s;
+}
+
+.blob-3 {
+  width: 360px;
+  height: 360px;
+  background: var(--accent-blue);
+  bottom: 5%;
+  left: 15%;
+  animation-delay: -10s;
+}
+
+.blob-4 {
+  width: 280px;
+  height: 280px;
+  background: var(--accent-mauve);
+  bottom: 30%;
+  right: 20%;
+  animation-delay: -3s;
+}
+
+@keyframes blobDrift {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(30px, -40px) scale(1.05); }
+  66%  { transform: translate(-20px, 20px) scale(0.97); }
+  100% { transform: translate(10px, -15px) scale(1.02); }
 }
 
 .container {
