@@ -31,10 +31,11 @@
     <li><strong>Media Hosting:</strong> Golpo Sandhan does not host, store, cache, upload, re-transmit, or distribute any copyrighted audio, video, or media files on its servers. All metadata (such as titles, author names, character tags, and summaries) is indexed to help users discover publicly available content.</li>
   </ul>
 
-  <h3>2. On-Device Storage & Local Data</h3>
+  <h3>2. On-Device Storage & Local Permissions</h3>
   <ul>
     <li><strong>Local Preferences:</strong> Your saved favorites, filter choices, search terms, and listening history are stored locally on your device (using on-device database storage). This data never leaves your device and is not transmitted to any external private server.</li>
     <li><strong>Device Telemetry:</strong> Standard operating system identifiers and general network state may be processed ephemerally on-device to ensure proper image loading, caching, and catalog delta synchronization.</li>
+    <li><strong>Screen Keep-Awake (Wakelock):</strong> The application utilizes standard system wakelock capabilities solely to prevent the screen from sleeping while actively listening to or watching a story in the in-app player.</li>
   </ul>
 
   <h3>3. Playback Architecture & Third-Party Services</h3>
@@ -46,13 +47,14 @@
         <li><em>"Listen on External App"</em> & <em>"Copy Link"</em>: Opens the official video URL in the user's preferred external web browser or system application.</li>
       </ul>
     </li>
-    <li><strong>In-App Foreground Web Player:</strong>
+    <li><strong>In-App Foreground Web Player ("Listen Now"):</strong>
       <ul>
-        <li><em>"Listen Now"</em>: Loads the official YouTube web player directly from YouTube’s servers using a standard in-app browser view. Playback occurs solely in the active foreground in accordance with third-party service terms and does not play in the background when the app is minimized or the screen is locked.</li>
-        <li>Interaction with this media is governed by the <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a> and <a href="https://www.youtube.com/t/terms" target="_blank">YouTube Terms of Service</a>. All views, ad revenues, and engagement metrics directly benefit the original content creators and channel uploaders.</li>
+        <li>Loads the official YouTube web player directly from YouTube’s servers using a standard in-app browser view. Playback occurs solely in the active foreground in accordance with third-party service terms and does not play in the background when the app is minimized or the screen is locked.</li>
+        <li>Custom media controls provided within the app strictly interface with the official YouTube player API to control play, pause, and seek functions. We do not alter, inject into, or block any advertisements served by YouTube.</li>
+        <li>By using the in-app player and YouTube playback features in Golpo Sandhan, users agree to be bound by the <a href="https://www.youtube.com/t/terms" target="_blank">YouTube Terms of Service</a> and acknowledge that data interaction is governed by the <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>. All views, ad revenues, and engagement metrics directly benefit the original content creators and channel uploaders.</li>
       </ul>
     </li>
-    <li><strong>Google AdMob:</strong> We display banner advertisements on catalog, metadata, and search navigation screens to support server maintenance and app development costs. We do not inject ads into, overlay ads upon, or monetize third-party audio/video streams. AdMob may process device advertising identifiers (such as the Android Advertising ID) in accordance with <a href="https://policies.google.com/technologies/ads" target="_blank">Google's Advertising Policies</a>.</li>
+    <li><strong>Google AdMob:</strong> We display banner, interstitial, and rewarded video advertisements to support server maintenance and app development costs. Users may voluntarily choose to watch a rewarded video ad to receive a temporary in-app ad-free browsing session (note: this does not remove third-party ads served by YouTube). We do not inject ads into, overlay ads upon, or monetize third-party audio/video streams. AdMob may process device advertising identifiers (such as the Android Advertising ID) in accordance with <a href="https://policies.google.com/technologies/ads" target="_blank">Google's Advertising Policies</a>.</li>
     <li><strong>Google Firebase & Analytics:</strong> We use Firebase Firestore for synchronizing public catalog metadata (episode lists, series, writers, and genre tags) and Google Analytics for Firebase to measure anonymous app usage, app performance, and screen navigation trends. This helps us understand how the app is used and improve user experience. Analytics data is collected anonymously and handled in accordance with the <a href="https://policies.google.com/technologies/partner-sites" target="_blank">Google Privacy & Terms</a>.</li>
   </ul>
 
